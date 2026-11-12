@@ -50,3 +50,31 @@ class InventoryService:
         )
 
         return self.repository.create_product(product)
+
+    def adjust_stock(
+            self,
+            product_id: int,
+            delta: int,
+            reason: str
+    ) -> Product:
+
+        # Validate inputs
+        validate_adjustment(delta)
+        cleaned_reason = validate_reason(reason, 200)
+
+        product = self.repository.get_product_by_id(product_id)
+
+        if product is None:
+            raise ValueError(f"Product with ID '{product_id}' does not exist.")
+
+        if product.archived:
+            raise ValueError(f"Cannot adjust stock for archived product with ID '{product_id}'.")
+
+        if product.quantity + delta < 0:
+            raise ValueError(f"Stock adjustment would result in negative quantity for product with ID '{product_id}'.")
+
+        return self.repository.adjust_stock(
+            product_id = product_id,
+            delta = delta,
+            reason = cleaned_reason
+        )
