@@ -65,3 +65,14 @@ def validate_adjustment(delta: int) -> int:
         raise ValueError("Stock adjustment cannot be zero.")
 
     return delta
+
+def validate_reason(reason: str) -> str:
+    cleaned_reason = reason.strip()
+
+    if len(cleaned_reason) < 3:
+        raise ValueError("Reason for stock adjustment must be at least 3 characters long.")
+
+    if len(cleaned_reason) > 200:
+        raise ValueError("Reason for stock adjustment cannot exceed 200 characters.")
+
+    return cleaned_reason
