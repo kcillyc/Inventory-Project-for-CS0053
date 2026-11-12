@@ -171,3 +171,22 @@ class InventoryService:
             fields = fields,
             expected_version = expected_version
         )
+
+def archive_product(self, product_id: int) -> Product:
+    '''
+    Archives a product in the inventory, preventing further stock adjustments or updates.
+    Ensures that the product exists and is not already archived.
+    '''
+
+    product = self.repository.get_product_by_id(product_id)
+
+    if product is None:
+        raise ValueError(f"Product with ID '{product_id}' does not exist.")
+
+    if product.archived:
+        raise ValueError(f"Product with ID '{product_id}' is already archived.")
+
+    if product.quantity != 0:
+        raise ValueError(f"Cannot archive product with ID '{product_id}' because only products with zero quantity can be archived.")
+
+    return self.repository.archive_product(product_id)
