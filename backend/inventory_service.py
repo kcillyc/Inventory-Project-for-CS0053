@@ -74,7 +74,7 @@ class InventoryService:
 
         # Validate inputs
         validate_adjustment(delta)
-        cleaned_reason = validate_reason(reason, 200)
+        cleaned_reason = validate_reason(reason)
 
         product = self.repository.get_product_by_id(product_id)
 
