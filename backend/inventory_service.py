@@ -82,9 +82,21 @@ class InventoryService:
     def list_low_stock_products(self) -> list[Product]:
         products = self.repository.list_products()
 
-        # Filter products that are not archived and have quantity less than or equal to reorder level
         return [
             product
             for product in products
             if not product.archived and product.quantity <= product.reorder_level
+        ]
+
+    def search_products(self, query: str) -> list[Product]:
+        term = query.strip().casefold() # Normalize the search term for case-insensitive matching
+
+        return [
+            product
+            for product in self.repository.list_products()
+            if not product.archived and (
+                term in product.sku.casefold() or
+                term in product.name.casefold() or
+                term in product.category.casefold()
+            )
         ]
