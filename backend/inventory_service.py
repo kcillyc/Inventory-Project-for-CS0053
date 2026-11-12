@@ -172,48 +172,48 @@ class InventoryService:
             expected_version = expected_version
         )
 
-def archive_product(self, product_id: int) -> Product:
-    '''
-    Archives a product in the inventory, preventing further stock adjustments or updates.
-    Ensures that the product exists and is not already archived.
-    '''
+    def archive_product(self, product_id: int) -> Product:
+        '''
+        Archives a product in the inventory, preventing further stock adjustments or updates.
+        Ensures that the product exists and is not already archived.
+        '''
 
-    product = self.repository.get_product_by_id(product_id)
+        product = self.repository.get_product_by_id(product_id)
 
-    if product is None:
-        raise ValueError(f"Product with ID '{product_id}' does not exist.")
+        if product is None:
+            raise ValueError(f"Product with ID '{product_id}' does not exist.")
 
-    if product.archived:
-        raise ValueError(f"Product with ID '{product_id}' is already archived.")
+        if product.archived:
+            raise ValueError(f"Product with ID '{product_id}' is already archived.")
 
-    if product.quantity != 0:
-        raise ValueError(f"Cannot archive product with ID '{product_id}' because only products with zero quantity can be archived.")
+        if product.quantity != 0:
+            raise ValueError(f"Cannot archive product with ID '{product_id}' because only products with zero quantity can be archived.")
 
-    return self.repository.archive_product(product_id)\
+        return self.repository.archive_product(product_id)\
 
-def get_summary(self) -> dict [str, int]:
-    '''
-    Provides a summary of the inventory, including total products, archived products, low stock products, and total quantity.
-    '''
+    def get_summary(self) -> dict [str, int]:
+        '''
+        Provides a summary of the inventory, including total products, archived products, low stock products, and total quantity.
+        '''
 
-    active_products = [product for product in self.repository.list_products() if not product.archived]
-    total_units = sum(product.quantity for product in active_products)
-    low_stock_count = sum(1 for product in active_products if product.quantity <= product.reorder_level)
-    total_value_costs = sum(product.quantity * product.unit_cost_cents for product in active_products)
+        active_products = [product for product in self.repository.list_products() if not product.archived]
+        total_units = sum(product.quantity for product in active_products)
+        low_stock_count = sum(1 for product in active_products if product.quantity <= product.reorder_level)
+        total_value_costs = sum(product.quantity * product.unit_cost_cents for product in active_products)
 
-    return {
-        "total_products": len(active_products),
-        "low_stock_products": low_stock_count,
-        "total_quantity": total_units,
-        "total_value_cents": total_value_costs
-    }
+        return {
+            "total_products": len(active_products),
+            "low_stock_products": low_stock_count,
+            "total_quantity": total_units,
+            "total_value_cents": total_value_costs
+        }
 
-def list_movements(self, limit: int = 200):
-    '''
-    Returns the most recent stock movements
-    '''
+    def list_movements(self, limit: int = 200):
+        '''
+        Returns the most recent stock movements
+        '''
 
-    if limit <= 0:
-        raise ValueError("Movement limit must be greater than zero")
+        if limit <= 0:
+            raise ValueError("Movement limit must be greater than zero")
 
-    return self.repository.list_movements(limit = limit)
+        return self.repository.list_movements(limit = limit)
