@@ -26,4 +26,4 @@ class Movement: # Change in stock level for a product
     delta: int # signed stock change (positive for incoming, negative for outgoing)
     balance: int
     reason: str
-    created_at: datetime = field(default_factory = datetime.now())
+    created_at: datetime = field(default_factory = datetime.now)
