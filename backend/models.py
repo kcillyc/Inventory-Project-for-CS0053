@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 from datetime import datetime
 
-'''
+"""
 Contains data models for the inventory management system.
-'''
+"""
 
 @dataclass
 class Product:
