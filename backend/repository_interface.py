@@ -4,7 +4,7 @@ which outlines the methods for interacting with the inventory data.
 """
 
 from typing import Protocol
-from models import Product, Movement
+from .models import Product, Movement
 
 class InventoryRepository(Protocol):
     def create_product(self, product: Product) -> Product:

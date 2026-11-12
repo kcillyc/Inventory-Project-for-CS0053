@@ -5,9 +5,9 @@ It interacts with a repository to perform CRUD operations and includes validatio
 
 """
 
-from models import Product
-from repository_interface import InventoryRepository
-from validators import (
+from .models import Product
+from .repository_interface import InventoryRepository
+from .validators import (
     normalize_sku,
     validate_adjustment,
     validate_positive_integer,
@@ -97,7 +97,7 @@ class InventoryService:
         '''
         Lists all products that are low on stock (quantity is less than or equal to the reorder level).
         '''
-        
+
         products = self.repository.list_products()
 
         return [
