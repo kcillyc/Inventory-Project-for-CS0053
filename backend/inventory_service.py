@@ -78,3 +78,13 @@ class InventoryService:
             delta = delta,
             reason = cleaned_reason
         )
+
+    def list_low_stock_products(self) -> list[Product]:
+        products = self.repository.list_products()
+
+        # Filter products that are not archived and have quantity less than or equal to reorder level
+        return [
+            product
+            for product in products
+            if not product.archived and product.quantity <= product.reorder_level
+        ]
