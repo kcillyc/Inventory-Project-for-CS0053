@@ -44,7 +44,7 @@ def validate_text(value: str, field_name: str, max_length: int) -> str:
 
     return cleaned_value
 
-def validate_positive_integer(value: int, field_name: str) -> int:
+def validate_non_negative_integer(value: int, field_name: str) -> int:
     '''
     Validates that a given value is a non-negative integer.
     '''

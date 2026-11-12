@@ -10,7 +10,7 @@ from .repository_interface import InventoryRepository
 from .validators import (
     normalize_sku,
     validate_adjustment,
-    validate_positive_integer,
+    validate_non_negative_integer,
     validate_reason,
     validate_text
 )
@@ -38,9 +38,9 @@ class InventoryService:
         cleaned_category = validate_text(category, "Category", 60)
 
         # Validate integer inputs
-        validate_positive_integer(quantity, "Quantity")
-        validate_positive_integer(unit_cost_cents, "Unit cost")
-        validate_positive_integer(reorder_level, "Reorder level")
+        validate_non_negative_integer(quantity, "Quantity")
+        validate_non_negative_integer(unit_cost_cents, "Unit cost")
+        validate_non_negative_integer(reorder_level, "Reorder level")
 
         # Check if a product with the same SKU already exists
         existing_product = self.repository.get_product_by_sku(normalized_sku)
@@ -123,3 +123,7 @@ class InventoryService:
                 term in product.category.casefold()
             )
         ]
+
+    # def update_product 
+
+    
