@@ -31,7 +31,6 @@ class InventoryService:
         '''
         Creates a new product in the inventory after validating the input data.
         '''
-
         # Normalize and validate text/str inputs
         normalized_sku = normalize_sku(sku)
         cleaned_name = validate_text(name, "Name", 100)
@@ -124,6 +123,51 @@ class InventoryService:
             )
         ]
 
-    # def update_product 
+    def update_product (
+            self,
+            product_id: int,
+            sku: str,
+            name: str,
+            category: str,
+            unit_cost_cents: int,
+            reorder_level: int,
+            expected_version: int
+    ) -> Product:
+        '''
+        Updates the details of an existing product in the inventory after validating the input data.
+        Ensures that the product exists, is not archived, and that the SKU is unique among non-archived products.
+        '''
 
-    
+        product = self.repository.get_product_by_id(product_id)
+
+        if product is None:
+            raise ValueError(f"Product with ID '{product_id}' does not exist.")
+
+        if product.archived:
+            raise ValueError(f"Cannot update archived product with ID '{product_id}'.")
+
+        normalized_sku = normalize_sku(sku)
+        cleaned_name = validate_text(name, "Name", 100)
+        cleaned_category = validate_text(category, "Category", 60)
+
+        validate_non_negative_integer(unit_cost_cents, "Unit cost")
+        validate_non_negative_integer(reorder_level, "Reorder level")
+
+        existing_product = self.repository.get_product_by_sku(normalized_sku)
+
+        if existing_product is not None and existing_product.id != product_id:
+            raise ValueError(f"Product with SKU '{normalized_sku}' already exists.")
+
+        fields = {
+            "sku": normalized_sku,
+            "name": cleaned_name,
+            "category": cleaned_category,
+            "unit_cost_cents": unit_cost_cents,
+            "reorder_level": reorder_level
+        }
+
+        return self.repository.update_product(
+            product_id = product_id,
+            fields = fields,
+            expected_version = expected_version
+        )
