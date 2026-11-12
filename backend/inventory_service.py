@@ -1,3 +1,10 @@
+"""
+Contains the InventoryService class, 
+which provides business logic for managing products in an inventory system. 
+It interacts with a repository to perform CRUD operations and includes validation for input data.
+
+"""
+
 from models import Product
 from repository_interface import InventoryRepository
 from validators import (
@@ -21,6 +28,9 @@ class InventoryService:
             unit_cost_cents: int,
             reorder_level: int
     ) -> Product:
+        '''
+        Creates a new product in the inventory after validating the input data.
+        '''
 
         # Normalize and validate text/str inputs
         normalized_sku = normalize_sku(sku)
@@ -57,6 +67,10 @@ class InventoryService:
             delta: int,
             reason: str
     ) -> Product:
+        '''
+        Adjusts the stock quantity of a product by a specified delta (positive or negative).
+        Validates the adjustment and ensures that the product exists and is not archived.
+        '''
 
         # Validate inputs
         validate_adjustment(delta)
@@ -80,6 +94,10 @@ class InventoryService:
         )
 
     def list_low_stock_products(self) -> list[Product]:
+        '''
+        Lists all products that are low on stock (quantity is less than or equal to the reorder level).
+        '''
+        
         products = self.repository.list_products()
 
         return [
@@ -89,6 +107,11 @@ class InventoryService:
         ]
 
     def search_products(self, query: str) -> list[Product]:
+        '''
+        Searches for products based on a query string that can match the SKU, name, or category.
+        The search is case-insensitive and ignores archived products.
+        '''
+
         term = query.strip().casefold() # Normalize the search term for case-insensitive matching
 
         return [
