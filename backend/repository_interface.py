@@ -31,13 +31,25 @@ class InventoryRepository(Protocol):
     def update_product(
             self, 
             product_id: int,
-            delta: int,
-            reason: str,
+            fields: dict,
+            expected_version: int,
         ) -> Product:
         '''
         Updates the stock level of a product and records the movement.
         '''
         # TODO: Implement the method to update a product's stock level and record the movement.
+        ...
+
+    def adjust_stock(
+            self, 
+            product_id: int, 
+            delta: int, 
+            reason: str
+        ) -> Product:
+        '''
+        Adjusts the stock level of a product and records the movement.
+        '''
+        # TODO: Implement the method to adjust a product's stock level and record the movement.
         ...
 
     def archive_product(self, product_id: int) -> Product:
