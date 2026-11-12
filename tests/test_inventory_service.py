@@ -107,7 +107,7 @@ class InventoryServiceTests(unittest.TestCase):
             sku = "PEN-001",
             name = "Blue Pen",
             category = "Supplies",
-            quantity = 10,
+            quantity = 5,
             unit_cost_cents = 2500,
             reorder_level = 3
         )
