@@ -43,3 +43,16 @@ def validate_text(value: str, field_name: str, max_length: int) -> str:
         raise ValueError(f"{field_name} cannot exceed {max_length} characters.")
 
     return cleaned_value
+
+def validate_positive_integer(value: int, field_name: str) -> int:
+    '''
+    Validates that a given value is a non-negative integer.
+    '''
+
+    if not isinstance(value, int) or isinstance(value, bool):
+        raise ValueError(f"{field_name} must be a whole number.")
+
+    if value < 0:
+        raise ValueError(f"{field_name} must not be a negative integer.")
+
+    return value
