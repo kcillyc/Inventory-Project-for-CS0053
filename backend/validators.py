@@ -1,8 +1,9 @@
-import re
 """
 This module provides validation for data inputs before they are processed or stored in the inventory management system.
 Will raise ValueError with descriptive messages if validation fails.
 """
+
+import re
 
 # SKU pattern: must start with an uppercase letter or digit, followed by any combination of uppercase letters, digits, underscores, or hyphens.
 SKU_PATTERN = re.compile(r"^[A-Z0-9][A-Z0-9_-]*$")
