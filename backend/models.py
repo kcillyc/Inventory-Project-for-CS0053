@@ -1,9 +1,9 @@
-from dataclasses import dataclass
-from datetime import datetime
-
 """
 Contains data models for the inventory management system.
 """
+
+from dataclasses import dataclass, field
+from datetime import datetime
 
 @dataclass
 class Product:
@@ -26,4 +26,4 @@ class Movement: # Change in stock level for a product
     delta: int # signed stock change (positive for incoming, negative for outgoing)
     balance: int
     reason: str
-    created_at: datetime = datetime.now()
+    created_at: datetime = field(default_factory = datetime.now())
