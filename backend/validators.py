@@ -56,3 +56,12 @@ def validate_positive_integer(value: int, field_name: str) -> int:
         raise ValueError(f"{field_name} must not be a negative integer.")
 
     return value
+
+def validate_adjustment(delta: int) -> int:
+    if not isinstance(delta, int) or isinstance(delta, bool):
+        raise ValueError("Adjustment delta must be a whole number.")
+
+    if delta == 0:
+        raise ValueError("Stock adjustment cannot be zero.")
+
+    return delta
