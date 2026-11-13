@@ -7,8 +7,9 @@ from datetime import datetime
 DB = "inventory.db"
 
 #creation of the database
-def create_database():
-    connection = sqlite3.connect(DB)
+def create_database(db_path=None, *, announce=True):
+    """Initialize the team's original schema at the requested database path."""
+    connection = sqlite3.connect(DB if db_path is None else db_path)
     connection.execute("PRAGMA foreign_keys = ON")
     #creation of cursor
     cursor = connection.cursor()
@@ -41,7 +42,8 @@ def create_database():
     connection.commit()
     #close tables
     connection.close() 
-    print("Database has been Created")
+    if announce:
+        print("Database has been Created")
      
 
 #function to add products
@@ -124,23 +126,11 @@ def recmove(product_id, amount, reason):
 
     print("Stock movement successfully recorded")
 
-#main program
-create_database()
-# Add an example product
-addprod(
-    "NB001",
-    "Notebook",
-    "School Supplies",
-    20,
-    5000,
-    5
-)
-
-# Add 10 notebooks
-recmove(1, 10, "Supplier delivery")
-
-# Remove 5 notebooks
-recmove(1, -5, "Issued to classroom")
-
-# Display current products
-showprod()
+if __name__ == "__main__":
+    # Keep the original teammate demonstration available when run explicitly.
+    # Importing this module to reuse its schema must never seed or change stock.
+    create_database()
+    addprod("NB001", "Notebook", "School Supplies", 20, 5000, 5)
+    recmove(1, 10, "Supplier delivery")
+    recmove(1, -5, "Issued to classroom")
+    showprod()

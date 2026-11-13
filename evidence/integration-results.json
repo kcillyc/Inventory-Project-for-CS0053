@@ -1,0 +1,13 @@
+{
+  "executed_at_utc": "2026-11-13T00:30:27.078584+00:00",
+  "python": "3.14.7",
+  "offline_tests": {
+    "exit_code": 0,
+    "output_file": "test-results.txt"
+  },
+  "actual_live_cli_report": {
+    "exit_code": 0,
+    "output_file": "live-report.txt",
+    "database": "isolated temporary demo, removed after verification"
+  }
+}

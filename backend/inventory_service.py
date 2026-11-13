@@ -5,6 +5,9 @@ It interacts with a repository to perform CRUD operations and includes validatio
 
 """
 
+from decimal import Decimal, ROUND_HALF_UP, localcontext
+
+from .exchange_service import ExchangeService
 from .models import Product
 from .repository_interface import InventoryRepository
 from .validators import (
@@ -16,8 +19,9 @@ from .validators import (
 )
 
 class InventoryService:
-    def __init__(self, repository: InventoryRepository):
+    def __init__(self, repository: InventoryRepository, exchange_service=None):
         self.repository = repository
+        self.exchange_service = exchange_service if exchange_service is not None else ExchangeService()
 
     def create_product(
             self,
@@ -189,7 +193,7 @@ class InventoryService:
         if product.quantity != 0:
             raise ValueError(f"Cannot archive product with ID '{product_id}' because only products with zero quantity can be archived.")
 
-        return self.repository.archive_product(product_id)\
+        return self.repository.archive_product(product_id)
 
     def get_summary(self) -> dict [str, int]:
         '''
@@ -206,6 +210,29 @@ class InventoryService:
             "low_stock_products": low_stock_count,
             "total_quantity": total_units,
             "total_value_cents": total_value_costs
+        }
+
+    def get_currency_report(self, target="USD") -> dict:
+        """Convert current stored inventory value using a live or cached quote.
+
+        The quote request contains no inventory data. Conversion is local, and
+        provider failures propagate to the caller without changing any stock.
+        """
+        summary = self.get_summary()
+        quote = self.exchange_service.get_quote(target)
+        rate = Decimal(quote["rate"])
+        with localcontext() as context:
+            context.prec = max(28, len(str(summary["total_value_cents"])) + len(rate.as_tuple().digits) + 8)
+            total_php = Decimal(summary["total_value_cents"]) / Decimal("100")
+            converted = (total_php * rate).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
+        return {
+            "total_php": f"{total_php:.2f}",
+            "converted_total": str(converted),
+            "currency": quote["quote"],
+            "rate": quote["rate"],
+            "rate_date": quote["date"],
+            "provider": quote["provider"],
+            "cached": quote["cached"],
         }
 
     def list_movements(self, limit: int = 200):
