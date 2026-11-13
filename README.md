@@ -38,18 +38,24 @@ failures produce readable errors; a failed report does not change stored stock.
 ## How the team code fits together
 
 ```text
-inventory.py: original SQLite schema
-    -> backend/sqlite_repository.py: InventoryRepository implementation
+backend/sqlite_repository.py: SQLite schema, migration and repository
     -> backend/inventory_service.py: summary and currency report
     -> backend/exchange_service.py: real HTTPS request and 15-minute quote cache
     -> app.py: user-triggered terminal report
 ```
 
-The SQLite adapter retains the original `unit_costs_cents` database column and
-maps it to the model's `unit_cost_cents` field. Stock movements are atomic,
+The schema and model both use the documented `unit_cost_cents` field. On first
+opening an older database, the repository backs it up and atomically renames
+`unit_costs_cents` to `unit_cost_cents`, preserving records and movement history.
+The backup is saved beside the database as
+`<name>.before-unit-cost-migration-<unique>.db`. Migration requires SQLite 3.25+
+and runs only once. Stop other database writers before starting a migration.
+Stock movements are atomic,
 metadata edits check versions, and history is retained after zero-stock archive.
 Importing the original `inventory.py` no longer runs its sample stock changes.
-Running that legacy file explicitly still runs its original example; use `app.py`
+The legacy helpers delegate to the service/repository, and all application SQL
+lives in `backend/sqlite_repository.py`. Running `inventory.py` explicitly runs
+the notebook example without reseeding an existing demo product; use `app.py`
 for the connected service flow.
 
 Quotes cache for 15 minutes within one process. A new terminal invocation starts
@@ -69,8 +75,10 @@ checks are recorded separately in `evidence/`. See
 integration details. Database files and temporary demonstration stock are ignored
 by Git; stop all database writers before copying a database backup.
 
-This local integration combines the team's `backend-structure` and
-`python-sqlite-inventory-code` branches on `api-integration`. That branch is
-uploaded to GitHub; its pull request into `backend-structure` is still pending.
+This integration combines the team's `backend-structure` and
+`python-sqlite-inventory-code` work on `api-integration`. Changes to this branch
+do not change the original team branches. See
+[development standards](docs/DEVELOPMENT_STANDARDS.md) for coding conventions,
+commit examples, and migration recovery instructions.
 The current app is command-line based;
 there is no web button or browser UI in this team repository yet.

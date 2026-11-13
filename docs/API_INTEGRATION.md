@@ -41,7 +41,7 @@ standard library are sufficient; internet is needed only for fresh quotes.
 
 ```text
 app.py --report --currency USD
-  -> SQLiteInventoryRepository reuses inventory.py's original schema
+  -> SQLiteInventoryRepository initializes or migrates the documented schema
   -> InventoryService.get_summary() reads stored active products
   -> total_value_cents / 100 becomes the total PHP amount
   -> ExchangeService.get_quote("USD") fetches or reuses a successful quote
@@ -57,9 +57,16 @@ stored total rather than relying on binary floating-point values.
 
 ## Database compatibility and transaction behavior
 
-The original schema names its monetary column `unit_costs_cents` (plural). The
-adapter maps it to the team's `Product.unit_cost_cents` without renaming columns
-or deleting data. It implements every method in `InventoryRepository`. Product
+The documented schema and `Product` model use `unit_cost_cents` (singular).
+`backend/sqlite_repository.py` owns schema creation and every application SQL
+statement. When it opens an original database containing `unit_costs_cents`, it
+first saves a unique SQLite backup beside that database, then renames the column
+to `unit_cost_cents` in one transaction. IDs, stored values, movement snapshots,
+foreign keys, indexes, and triggers are retained. Reopening a canonical database
+does not repeat the migration or create another backup. Migration requires
+SQLite 3.25+; stop other writers first. Ambiguous or missing cost columns are
+reported without guessing which values to use. The adapter implements every
+method in `InventoryRepository`. Product
 listing includes archived rows, which the existing service filters from active
 summaries/searches.
 
@@ -69,10 +76,12 @@ and movement writes commit together or roll back together. Metadata edits check
 the expected version and preserve old movement labels. Only zero-stock items
 can be archived; history remains and their SKUs stay reserved case-insensitively.
 
-`inventory.py` retains the original example when run directly, but importing it
-now only defines its functions. The connected app uses the service/repository
-flow rather than invoking that example. Existing legacy timestamps/records are
-retained; new movements use UTC. This initial integration does not add a schema
+`inventory.py` retains compatibility helpers and a notebook example; importing
+it does not initialize a database or change stock. Its helpers now delegate to
+the service/repository instead of containing separate SQL. Running the example
+again does not reseed its saved notebook product. Existing legacy timestamps
+and records are retained; new movements use UTC. The migration only corrects
+the documented cost-column spelling. This integration does not add a general
 migration framework, web interface, accounts, or historical cost layers.
 
 ## External request contract

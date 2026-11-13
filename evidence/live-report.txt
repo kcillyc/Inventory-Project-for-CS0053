@@ -1,9 +1,8 @@
-Fictional demonstration stock created in the new database.
-Database: C:\Users\jjbed\AppData\Local\Temp\tmp5aaium5f\live-demo.db
+Database: D:\essential\Inventory-Project-for-CS0053\inventory.db
 Active products: 1
 Units in stock: 25
 Inventory value: PHP 1250.00
-Converted value: USD 19.68
-Exchange rate: 1 PHP = 0.015746 USD
+Converted value: USD 19.67
+Exchange rate: 1 PHP = 0.015732 USD
 Provider: Frankfurter | Rate date: 2026-11-13
 Quote: Live request

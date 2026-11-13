@@ -1,13 +1,20 @@
 {
-  "executed_at_utc": "2026-11-13T01:09:17.131804+00:00",
+  "executed_at_utc": "2026-11-13T05:19:33.646124+00:00",
   "python": "3.14.7",
   "offline_tests": {
     "exit_code": 0,
+    "tests_run": 52,
     "output_file": "test-results.txt"
   },
   "actual_live_cli_report": {
     "exit_code": 0,
     "output_file": "live-report.txt",
-    "database": "isolated temporary demo, removed after verification"
+    "database": "existing local inventory.db after backed-up schema migration"
+  },
+  "schema_migration": {
+    "canonical_cost_column": "unit_cost_cents",
+    "existing_product_and_movement_records_preserved": true,
+    "legacy_backup_verified": true,
+    "repeated_initialization_idempotent": true
   }
 }

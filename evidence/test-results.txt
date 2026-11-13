@@ -29,6 +29,17 @@ test_duplicate_sku_is_rejected (test_inventory_service.InventoryServiceTests.tes
 Test that creating a product with a duplicate SKU raises a ValueError. ... ok
 test_stock_out_cannot_exceed_quantity (test_inventory_service.InventoryServiceTests.test_stock_out_cannot_exceed_quantity)
 Test that adjusting stock to a negative quantity raises a ValueError. ... ok
+test_legacy_keyword_and_helpers_preserve_validated_stock_history (test_legacy_entry_points.LegacyEntryPointTests.test_legacy_keyword_and_helpers_preserve_validated_stock_history) ... ok
+test_repeating_legacy_demo_does_not_reseed_or_repeat_movements (test_legacy_entry_points.LegacyEntryPointTests.test_repeating_legacy_demo_does_not_reseed_or_repeat_movements) ... ok
+test_ambiguous_or_missing_cost_column_fails_without_modifying_database (test_schema_migration.SchemaMigrationTests.test_ambiguous_or_missing_cost_column_fails_without_modifying_database) ... ok
+test_backup_contains_committed_rows_still_in_write_ahead_log (test_schema_migration.SchemaMigrationTests.test_backup_contains_committed_rows_still_in_write_ahead_log) ... ok
+test_backup_failure_leaves_legacy_schema_and_records_unchanged (test_schema_migration.SchemaMigrationTests.test_backup_failure_leaves_legacy_schema_and_records_unchanged) ... ok
+test_canonical_existing_database_is_usable_without_migration (test_schema_migration.SchemaMigrationTests.test_canonical_existing_database_is_usable_without_migration) ... ok
+test_documented_notebook_example_records_each_balance_and_final_quantity (test_schema_migration.SchemaMigrationTests.test_documented_notebook_example_records_each_balance_and_final_quantity) ... ok
+test_failed_rename_rolls_back_schema_and_keeps_recovery_backup (test_schema_migration.SchemaMigrationTests.test_failed_rename_rolls_back_schema_and_keeps_recovery_backup) ... ok
+test_legacy_upgrade_preserves_records_indexes_triggers_and_backup (test_schema_migration.SchemaMigrationTests.test_legacy_upgrade_preserves_records_indexes_triggers_and_backup) ... ok
+test_new_database_matches_documented_columns_and_relationship (test_schema_migration.SchemaMigrationTests.test_new_database_matches_documented_columns_and_relationship) ... ok
+test_reopening_migrated_database_does_not_repeat_backup_or_migration (test_schema_migration.SchemaMigrationTests.test_reopening_migrated_database_does_not_repeat_backup_or_migration) ... ok
 test_archive_movement_failure_rolls_back_archive (test_sqlite_integration.SQLiteInventoryIntegrationTests.test_archive_movement_failure_rolls_back_archive) ... ok
 test_archive_requires_zero_stock_retains_history_and_reserves_sku (test_sqlite_integration.SQLiteInventoryIntegrationTests.test_archive_requires_zero_stock_retains_history_and_reserves_sku) ... ok
 test_competing_stock_outs_cannot_oversell_a_stale_service_read (test_sqlite_integration.SQLiteInventoryIntegrationTests.test_competing_stock_outs_cannot_oversell_a_stale_service_read) ... ok
@@ -44,6 +55,6 @@ test_summary_and_search_exclude_archived_rows (test_sqlite_integration.SQLiteInv
 test_zero_opening_stock_has_no_fictitious_stock_movement (test_sqlite_integration.SQLiteInventoryIntegrationTests.test_zero_opening_stock_has_no_fictitious_stock_movement) ... ok
 
 ----------------------------------------------------------------------
-Ran 41 tests in 3.638s
+Ran 52 tests in 3.111s
 
 OK
