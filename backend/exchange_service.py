@@ -10,6 +10,7 @@ import threading
 import time
 from datetime import date
 from decimal import Decimal
+from http.client import HTTPException
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
@@ -78,7 +79,7 @@ def fetch_exchange_rate(target="USD"):
         else:
             message = f"Exchange service returned HTTP {status}. Try again later."
         raise RuntimeError(message) from error
-    except (URLError, OSError, TimeoutError) as error:
+    except (URLError, OSError, TimeoutError, HTTPException) as error:
         raise RuntimeError(
             "Cannot connect to the exchange service. Check your internet and retry."
         ) from error

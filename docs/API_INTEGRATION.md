@@ -3,10 +3,11 @@
 ## Purpose and team code
 
 This integration combines the GitHub `backend-structure` and
-`python-sqlite-inventory-code` branches on the local `codex/api-integration`
+`python-sqlite-inventory-code` branches on `api-integration`
 branch. The SQLite branch was merged locally with its original author history.
 The additional adapter, report method, cache, terminal entry point and tests are
-local changes for team review; no GitHub push, PR or remote merge is claimed.
+published on that GitHub branch. A pull request and team review are still pending;
+later local verification or fixes must be committed and pushed separately.
 
 The application reads actual SQLite products and calculates their current PHP
 value through the team's `InventoryService.get_summary()`. It then requests an
@@ -108,7 +109,7 @@ refresh never silently returns an expired rate.
 
 Unsupported input raises ValueError before network access. HTTP 429 displays
 wait-before-retry guidance; other HTTP failures include status. Connection
-failures, timeouts, oversized/empty/malformed data and invalid rates/dates raise
+failures, timeouts, interrupted HTTP responses, oversized/empty/malformed data and invalid rates/dates raise
 RuntimeError with useful messages. The CLI displays the error and returns status
 1; database stock is unchanged. SQLite setup/access failures also display errors.
 The service caller can catch these errors and continue other inventory work.

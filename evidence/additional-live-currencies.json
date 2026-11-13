@@ -1,0 +1,51 @@
+{
+  "executed_at_utc": "2026-11-13T01:07:19.898269+00:00",
+  "additional_live_currency_checks": [
+    {
+      "status": "PASS",
+      "cache_reuse": "PASS",
+      "total_php": "1250.00",
+      "converted_total": "17.72",
+      "currency": "EUR",
+      "rate": "0.014173",
+      "rate_date": "2026-11-13",
+      "provider": "Frankfurter",
+      "cached": false
+    },
+    {
+      "status": "PASS",
+      "cache_reuse": "PASS",
+      "total_php": "1250.00",
+      "converted_total": "25.27",
+      "currency": "SGD",
+      "rate": "0.020214",
+      "rate_date": "2026-11-13",
+      "provider": "Frankfurter",
+      "cached": false
+    },
+    {
+      "status": "PASS",
+      "cache_reuse": "PASS",
+      "total_php": "1250.00",
+      "converted_total": "3140.00",
+      "currency": "JPY",
+      "rate": "2.512",
+      "rate_date": "2026-11-13",
+      "provider": "Frankfurter",
+      "cached": false
+    },
+    {
+      "status": "PASS",
+      "cache_reuse": "PASS",
+      "total_php": "1250.00",
+      "converted_total": "14.80",
+      "currency": "GBP",
+      "rate": "0.011836",
+      "rate_date": "2026-11-13",
+      "provider": "Frankfurter",
+      "cached": false
+    }
+  ],
+  "invalid_currency_rejected": "PASS",
+  "stored_inventory_unchanged": true
+}

@@ -70,6 +70,7 @@ integration details. Database files and temporary demonstration stock are ignore
 by Git; stop all database writers before copying a database backup.
 
 This local integration combines the team's `backend-structure` and
-`python-sqlite-inventory-code` branches on `codex/api-integration`. It has not
-been pushed, reviewed, or merged on GitHub. The current app is command-line based;
+`python-sqlite-inventory-code` branches on `api-integration`. That branch is
+uploaded to GitHub; its pull request into `backend-structure` is still pending.
+The current app is command-line based;
 there is no web button or browser UI in this team repository yet.

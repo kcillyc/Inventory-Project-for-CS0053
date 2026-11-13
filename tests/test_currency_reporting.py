@@ -4,6 +4,7 @@ import io
 import tempfile
 import unittest
 from contextlib import redirect_stdout
+from http.client import IncompleteRead
 from pathlib import Path
 from unittest.mock import patch
 
@@ -155,6 +156,33 @@ class CommandLineTests(unittest.TestCase):
             self.assertIn("Error: Connection unavailable", output)
             inventory = InventoryService(SQLiteInventoryRepository(database))
             self.assertEqual(inventory.get_summary()["total_quantity"], 25)
+
+    def test_interrupted_report_displays_error_and_inventory_remains_usable(self):
+        with tempfile.TemporaryDirectory() as folder:
+            database = Path(folder) / "test.db"
+            inventory = InventoryService(SQLiteInventoryRepository(database))
+            item = inventory.create_product("PEN001", "Pen", "Supplies", 5, 125, 2)
+            original = inventory.get_summary()
+            interrupted = io.BytesIO(b'{"base":"PHP",')
+            interrupted.status = 200
+            with patch(
+                "backend.exchange_service.urlopen", return_value=interrupted
+            ), patch.object(
+                interrupted, "read", side_effect=IncompleteRead(b'{"base":"PHP",', 20)
+            ):
+                status, output = self.run_app(["--db", str(database), "--report"])
+
+            self.assertEqual(status, 1)
+            self.assertIn("Error:", output)
+            self.assertIn("internet", output)
+            reopened = InventoryService(SQLiteInventoryRepository(database))
+            self.assertEqual(reopened.get_summary(), original)
+            self.assertEqual(
+                reopened.adjust_stock(
+                    item.id, 1, "Delivery after interruption"
+                ).quantity,
+                6,
+            )
 
 
 if __name__ == "__main__":
