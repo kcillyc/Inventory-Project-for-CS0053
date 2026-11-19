@@ -1,0 +1,9 @@
+Fictional demonstration stock created in the new database.
+Database: C:\Users\jjbed\AppData\Local\Temp\john-rich-connection-hmv9xysy\demo.db
+Active products: 1
+Units in stock: 25
+Inventory value: PHP 1250.00
+Converted value: USD 19.64
+Exchange rate: 1 PHP = 0.01571 USD
+Provider: Frankfurter | Rate date: 2026-11-19
+Quote: Live request

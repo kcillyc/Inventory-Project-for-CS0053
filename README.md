@@ -37,6 +37,12 @@ failures produce readable errors; a failed report does not change stored stock.
 
 ## How the team code fits together
 
+John Rich Bernaldez's application connection is documented in
+[Application connection](docs/APPLICATION_CONNECTION.md). It exposes the menu
+actions and prepares `python app.py --menu` for `ui.cli.run_menu(connection)`.
+Kate's menu file is still required for a real interactive session. The original
+summary/report commands above continue to run without that optional UI.
+
 ```text
 backend/sqlite_repository.py: SQLite schema, migration and repository
     -> backend/inventory_service.py: summary and currency report

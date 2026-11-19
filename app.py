@@ -3,18 +3,38 @@
 import argparse
 import sqlite3
 from decimal import Decimal, localcontext
+from importlib import import_module
 from pathlib import Path
 
-from backend.inventory_service import InventoryService
-from backend.sqlite_repository import SQLiteInventoryRepository
+from application_connection import create_application
 
 ROOT = Path(__file__).resolve().parent
 
 
-def main():
+def load_menu():
+    """Load Kate's UI only when explicitly requested, using the documented hook."""
+    try:
+        module = import_module("ui.cli")
+    except ModuleNotFoundError as error:
+        if error.name in ("ui", "ui.cli"):
+            raise RuntimeError(
+                "Menu UI is not available yet. Add ui/cli.py with "
+                "run_menu(connection). Use --summary or --report meanwhile."
+            ) from error
+        raise RuntimeError(f"Menu dependency is missing: {error.name}.") from error
+    runner = getattr(module, "run_menu", None)
+    if not callable(runner):
+        raise RuntimeError("ui/cli.py must expose run_menu(connection).")
+    return runner
+
+
+def main(argv=None):
     parser = argparse.ArgumentParser(
         description="Inventory summary and currency reporting"
     )
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--menu", action="store_true", help="Launch the menu UI")
+    mode.add_argument("--summary", action="store_true", help="Show offline totals")
     parser.add_argument(
         "--db", type=Path, default=ROOT / "inventory.db", help="SQLite database path"
     )
@@ -23,16 +43,19 @@ def main():
         action="store_true",
         help="Seed fictional stock only if the database file is new",
     )
-    parser.add_argument(
+    mode.add_argument(
         "--report",
         action="store_true",
         help="Fetch a rate and convert the stored inventory total",
     )
     parser.add_argument("--currency", default="USD", help="USD, EUR, SGD, JPY, or GBP")
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
     try:
+        # Resolve the optional UI before creating or migrating any database.
+        menu_runner = load_menu() if args.menu else None
         new_database = not args.db.exists()
-        service = InventoryService(SQLiteInventoryRepository(args.db))
+        connection = create_application(args.db)
+        service = connection.service
         if args.demo and new_database:
             # Reproduce the original SQLite branch's demonstration through the
             # actual service/repository contract, including its stock movements.
@@ -42,6 +65,12 @@ def main():
             service.adjust_stock(item.id, 10, "Supplier delivery")
             service.adjust_stock(item.id, -5, "Issued to classroom")
             print("Fictional demonstration stock created in the new database.")
+        if menu_runner is not None:
+            try:
+                menu_runner(connection)
+            except (EOFError, KeyboardInterrupt):
+                print("Menu closed.")
+            return 0
         summary = service.get_summary()
         with localcontext() as context:
             context.prec = max(28, len(str(summary["total_value_cents"])) + 8)

@@ -7,7 +7,8 @@ preferences for editors that support it.
 
 Keep application SQL, schema initialization, and database migrations in
 `backend/sqlite_repository.py`. Business rules belong in `InventoryService`,
-input checks in `validators.py`, and external HTTP requests in
+field checks in `validators.py`, menu input conversion and action wiring in
+`application_connection.py`, and external HTTP requests in
 `exchange_service.py`. The compatibility functions in `inventory.py` call these
 layers and do not contain SQL. Test fixtures may use SQL against temporary
 databases to verify storage behavior and migration safety.
