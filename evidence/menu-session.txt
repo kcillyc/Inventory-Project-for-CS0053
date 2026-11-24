@@ -1,0 +1,130 @@
+
+SIMPLE INVENTORY 1.0.0 - local single-user application
+1 View products       2 Add product        3 Edit product
+4 Stock in            5 Stock out          6 Search
+7 Low stock           8 Movement history   9 Archive
+10 Summary            11 Currency report   12 Export CSV
+0 Exit                :back cancels the current form
+Choose an action: ADD PRODUCT - enter :back to cancel
+SKU: Product name: Category: Opening quantity [0]: Unit cost in PHP [0.00]: Reorder level [0]: Product saved: ID 1, NB001.
+
+SIMPLE INVENTORY 1.0.0 - local single-user application
+1 View products       2 Add product        3 Edit product
+4 Stock in            5 Stock out          6 Search
+7 Low stock           8 Movement history   9 Archive
+10 Summary            11 Currency report   12 Export CSV
+0 Exit                :back cancels the current form
+Choose an action: STOCK IN
+Product ID: Quantity (positive whole number): Reason (3 to 200 characters): Movement recorded: NB001; remaining stock 15.
+
+SIMPLE INVENTORY 1.0.0 - local single-user application
+1 View products       2 Add product        3 Edit product
+4 Stock in            5 Stock out          6 Search
+7 Low stock           8 Movement history   9 Archive
+10 Summary            11 Currency report   12 Export CSV
+0 Exit                :back cancels the current form
+Choose an action: STOCK OUT
+Product ID: Quantity (positive whole number): Reason (3 to 200 characters): Movement recorded: NB001; remaining stock 3.
+
+SIMPLE INVENTORY 1.0.0 - local single-user application
+1 View products       2 Add product        3 Edit product
+4 Stock in            5 Stock out          6 Search
+7 Low stock           8 Movement history   9 Archive
+10 Summary            11 Currency report   12 Export CSV
+0 Exit                :back cancels the current form
+Choose an action: Product ID to edit: EDIT PRODUCT - Enter keeps a value; :back cancels. Quantity uses stock in/out.
+SKU [NB001]: Product name [Notebook]: Category [School Supplies]: Unit cost in PHP [12.50]: Reorder level [3]: Product updated: NB001. Quantity remains 3.
+
+SIMPLE INVENTORY 1.0.0 - local single-user application
+1 View products       2 Add product        3 Edit product
+4 Stock in            5 Stock out          6 Search
+7 Low stock           8 Movement history   9 Archive
+10 Summary            11 Currency report   12 Export CSV
+0 Exit                :back cancels the current form
+Choose an action: ACTIVE PRODUCTS
+ID | SKU   | Product          | Category        | Qty | Unit cost | Reorder | Status   
+---+-------+------------------+-----------------+-----+-----------+---------+----------
+ 1 | NB001 | Revised notebook | School Supplies |   3 | PHP 20.00 |       3 | Low stock
+
+SIMPLE INVENTORY 1.0.0 - local single-user application
+1 View products       2 Add product        3 Edit product
+4 Stock in            5 Stock out          6 Search
+7 Low stock           8 Movement history   9 Archive
+10 Summary            11 Currency report   12 Export CSV
+0 Exit                :back cancels the current form
+Choose an action: Search name, SKU, or category []: ID | SKU   | Product          | Category        | Qty | Unit cost | Reorder | Status   
+---+-------+------------------+-----------------+-----+-----------+---------+----------
+ 1 | NB001 | Revised notebook | School Supplies |   3 | PHP 20.00 |       3 | Low stock
+
+SIMPLE INVENTORY 1.0.0 - local single-user application
+1 View products       2 Add product        3 Edit product
+4 Stock in            5 Stock out          6 Search
+7 Low stock           8 Movement history   9 Archive
+10 Summary            11 Currency report   12 Export CSV
+0 Exit                :back cancels the current form
+Choose an action: AT OR BELOW REORDER LEVEL
+ID | SKU   | Product          | Category        | Qty | Unit cost | Reorder | Status   
+---+-------+------------------+-----------------+-----+-----------+---------+----------
+ 1 | NB001 | Revised notebook | School Supplies |   3 | PHP 20.00 |       3 | Low stock
+
+SIMPLE INVENTORY 1.0.0 - local single-user application
+1 View products       2 Add product        3 Edit product
+4 Stock in            5 Stock out          6 Search
+7 Low stock           8 Movement history   9 Archive
+10 Summary            11 Currency report   12 Export CSV
+0 Exit                :back cancels the current form
+Choose an action: Latest movements to show [200]: ID | Date and time        | SKU   | Change | Balance | Reason             
+---+----------------------+-------+--------+---------+--------------------
+ 3 | 2026-11-23 11:05 UTC | NB001 |    -12 |       3 | Issued to classroom
+ 2 | 2026-11-23 11:05 UTC | NB001 |     +5 |      15 | Supplier delivery  
+ 1 | 2026-11-23 11:05 UTC | NB001 |    +10 |      10 | Opening stock      
+New timestamps use UTC. A local* label identifies a preserved legacy timestamp.
+
+SIMPLE INVENTORY 1.0.0 - local single-user application
+1 View products       2 Add product        3 Edit product
+4 Stock in            5 Stock out          6 Search
+7 Low stock           8 Movement history   9 Archive
+10 Summary            11 Currency report   12 Export CSV
+0 Exit                :back cancels the current form
+Choose an action: INVENTORY SUMMARY
+Active products: 1
+Units in stock: 3
+At or below reorder level: 1
+Current inventory value: PHP 60.00
+
+SIMPLE INVENTORY 1.0.0 - local single-user application
+1 View products       2 Add product        3 Edit product
+4 Stock in            5 Stock out          6 Search
+7 Low stock           8 Movement history   9 Archive
+10 Summary            11 Currency report   12 Export CSV
+0 Exit                :back cancels the current form
+Choose an action: CSV output path [reports/inventory-20261123-110554-166972.csv]: CSV exported: C:\Users\Persy\AppData\Local\Temp\inventory-verification-7oc0oguq\inventory.csv
+
+SIMPLE INVENTORY 1.0.0 - local single-user application
+1 View products       2 Add product        3 Edit product
+4 Stock in            5 Stock out          6 Search
+7 Low stock           8 Movement history   9 Archive
+10 Summary            11 Currency report   12 Export CSV
+0 Exit                :back cancels the current form
+Choose an action: STOCK OUT
+Product ID: Quantity (positive whole number): Reason (3 to 200 characters): Error: Stock adjustment would result in negative quantity for product with ID '1'.
+
+SIMPLE INVENTORY 1.0.0 - local single-user application
+1 View products       2 Add product        3 Edit product
+4 Stock in            5 Stock out          6 Search
+7 Low stock           8 Movement history   9 Archive
+10 Summary            11 Currency report   12 Export CSV
+0 Exit                :back cancels the current form
+Choose an action: INVENTORY SUMMARY
+Active products: 1
+Units in stock: 3
+At or below reorder level: 1
+Current inventory value: PHP 60.00
+
+SIMPLE INVENTORY 1.0.0 - local single-user application
+1 View products       2 Add product        3 Edit product
+4 Stock in            5 Stock out          6 Search
+7 Low stock           8 Movement history   9 Archive
+10 Summary            11 Currency report   12 Export CSV
+0 Exit                :back cancels the current form
+Choose an action: Inventory closed. Saved records remain in the database.

@@ -1,0 +1,19 @@
+classDiagram
+    class InventoryService {
+        +create_product(...)
+        +adjust_stock(id, delta, reason)
+        +get_summary()
+    }
+    class InventoryRepository {
+        <<Protocol>>
+        +create_product(product)
+        +get_product_by_id(id)
+        +adjust_stock(id, delta, reason)
+        +list_movements(limit)
+    }
+    class SQLiteInventoryRepository {
+        +connection()
+        +adjust_stock(id, delta, reason)
+    }
+    InventoryService --> InventoryRepository : uses
+    InventoryRepository <|.. SQLiteInventoryRepository : structural implementation

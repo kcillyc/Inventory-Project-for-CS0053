@@ -1,0 +1,8 @@
+### Reference rate; no account/key required.
+GET https://api.frankfurter.dev/v2/rate/php/usd
+Accept: application/json
+User-Agent: CS0053Inventory/1.0 (educational project)
+
+### Another supported pair
+GET https://api.frankfurter.dev/v2/rate/php/eur
+Accept: application/json

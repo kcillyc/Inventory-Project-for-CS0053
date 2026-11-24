@@ -1,0 +1,69 @@
+{
+  "executed_at_utc": "2026-11-23T11:05:53.941867+00:00",
+  "python": "3.12.14",
+  "sqlite": "3.53.1",
+  "platform": "Windows",
+  "offline_tests": {
+    "run": 102,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "successful": true,
+    "seconds": 1.912,
+    "by_module": {
+      "test_application_connection": 13,
+      "test_cli": 18,
+      "test_csv_export": 3,
+      "test_currency_reporting": 10,
+      "test_exchange_service": 14,
+      "test_import_safety": 1,
+      "test_inventory_service": 3,
+      "test_legacy_entry_points": 2,
+      "test_repository_validation": 8,
+      "test_schema_migration": 9,
+      "test_sqlite_integration": 13,
+      "test_validators": 8
+    },
+    "output_file": "test-results.txt"
+  },
+  "actual_menu_session": {
+    "exit_code": 0,
+    "csv_created": true,
+    "error_recovered": true,
+    "output_file": "menu-session.txt",
+    "input_file": "menu-inputs.json"
+  },
+  "actual_live_cli_reports": {
+    "USD": {
+      "exit_code": 0,
+      "seconds": 1.052,
+      "output_file": "live-usd.txt"
+    },
+    "EUR": {
+      "exit_code": 0,
+      "seconds": 0.73,
+      "output_file": "live-eur.txt"
+    },
+    "SGD": {
+      "exit_code": 0,
+      "seconds": 0.752,
+      "output_file": "live-sgd.txt"
+    },
+    "JPY": {
+      "exit_code": 0,
+      "seconds": 0.652,
+      "output_file": "live-jpy.txt"
+    },
+    "GBP": {
+      "exit_code": 0,
+      "seconds": 0.637,
+      "output_file": "live-gbp.txt"
+    }
+  },
+  "clean_environment": {
+    "exit_code": 0,
+    "seconds": 0.244,
+    "packages_installed": 0,
+    "output_file": "clean-environment.txt"
+  }
+}

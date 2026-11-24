@@ -1,0 +1,10 @@
+flowchart TD
+    A[app.py startup] --> B[TerminalUI prompts and tables]
+    A --> C[ApplicationConnection dispatcher]
+    B --> C
+    C --> D[InventoryService rules]
+    D --> E[InventoryRepository Protocol]
+    E --> F[SQLiteInventoryRepository]
+    F --> G[(SQLite products and movements)]
+    D --> H[ExchangeService HTTP and cache]
+    H --> I[Frankfurter HTTPS API]

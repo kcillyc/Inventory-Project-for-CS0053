@@ -1,0 +1,18 @@
+erDiagram
+    PRODUCTS ||--o{ MOVEMENTS : has
+    PRODUCTS {
+        integer id PK
+        text sku UK
+        integer quantity
+        integer unit_cost_cents
+        integer version
+        integer archived
+    }
+    MOVEMENTS {
+        integer id PK
+        integer product_id FK
+        integer delta
+        integer balance
+        text reason
+        text created_at
+    }
