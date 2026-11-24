@@ -1,0 +1,8 @@
+Database: C:\Users\Persy\AppData\Local\Temp\inventory-verification-7oc0oguq\live.db
+Active products: 1
+Units in stock: 25
+Inventory value: PHP 1250.00
+Converted value: GBP 14.94
+Exchange rate: 1 PHP = 0.011948 GBP
+Provider: Frankfurter | Rate date: 2026-11-23
+Quote: Live request

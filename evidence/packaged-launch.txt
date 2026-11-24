@@ -1,0 +1,39 @@
+Fictional demonstration stock created in the new database.
+
+SIMPLE INVENTORY 1.0.0 - local single-user application
+1 View products       2 Add product        3 Edit product
+4 Stock in            5 Stock out          6 Search
+7 Low stock           8 Movement history   9 Archive
+10 Summary            11 Currency report   12 Export CSV
+0 Exit                :back cancels the current form
+Choose an action: ACTIVE PRODUCTS
+ID | SKU   | Product  | Category        | Qty | Unit cost | Reorder | Status  
+---+-------+----------+-----------------+-----+-----------+---------+---------
+ 1 | NB001 | Notebook | School Supplies |  25 | PHP 50.00 |       5 | In stock
+
+SIMPLE INVENTORY 1.0.0 - local single-user application
+1 View products       2 Add product        3 Edit product
+4 Stock in            5 Stock out          6 Search
+7 Low stock           8 Movement history   9 Archive
+10 Summary            11 Currency report   12 Export CSV
+0 Exit                :back cancels the current form
+Choose an action: INVENTORY SUMMARY
+Active products: 1
+Units in stock: 25
+At or below reorder level: 0
+Current inventory value: PHP 1,250.00
+
+SIMPLE INVENTORY 1.0.0 - local single-user application
+1 View products       2 Add product        3 Edit product
+4 Stock in            5 Stock out          6 Search
+7 Low stock           8 Movement history   9 Archive
+10 Summary            11 Currency report   12 Export CSV
+0 Exit                :back cancels the current form
+Choose an action: Inventory closed. Saved records remain in the database.
+
+RESTART SUMMARY
+Database: C:\Users\Persy\AppData\Local\Temp\inventory-delivery-check-0e_xz2zu\operator.db
+Active products: 1
+Units in stock: 25
+Inventory value: PHP 1250.00
+Add --report --currency USD to retrieve an external exchange quote.

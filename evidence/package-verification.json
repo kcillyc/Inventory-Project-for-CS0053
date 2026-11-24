@@ -1,0 +1,21 @@
+{
+  "verified_at_utc": "2026-11-23T11:25:53.706074+00:00",
+  "archive": "CS0053-Inventory-Complete-2026-11-23.zip",
+  "python": "3.12.14",
+  "extracted_application_tests": 102,
+  "failures": 0,
+  "extracted_menu_exit": 0,
+  "restart_persistence": "25 units; PHP 1250.00",
+  "source_sha256": "ae1e378e9f8322202f5ae359d21287c52f3e2078e710a2528528ea91aa69893a",
+  "source_matches_tested_extraction": true,
+  "markdown_local_links": "all resolved",
+  "json_files": "all parsed",
+  "python_syntax": "all parsed",
+  "git_commands_executed": false,
+  "git_or_github_generated_artifacts": false,
+  "handwritten_gitignore_included": true,
+  "runtime_databases_in_archive": false,
+  "pdf_manual_pages": 29,
+  "zip_crc_check": "passed",
+  "archive_file_count": 91
+}

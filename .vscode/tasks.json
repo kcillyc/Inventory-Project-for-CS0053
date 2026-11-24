@@ -1,0 +1,1 @@
+{"version":"2.0.0","tasks":[{"label":"Run inventory tests","type":"shell","command":"python","args":["-m","unittest","discover","-s","tests","-v"],"group":{"kind":"test","isDefault":true},"problemMatcher":[]}]}
